@@ -1,27 +1,28 @@
 package com.banking.bankingsystem.entities;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "tb_user")
-@Getter
-@Setter
-@AllArgsConstructor
-@EqualsAndHashCode(of="id")
-public class User {
+public class User implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +43,10 @@ public class User {
 	@Column(name = "dt_nasc")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date birthDate;
-
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
+	Set<Count> count = new HashSet<>();
 	
 	public User() {
 		
@@ -103,6 +107,30 @@ public class User {
 
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", cpf=" + cpf + ", telefone=" + telefone
+				+ ", birthDate=" + birthDate + ", count=" + count + "]";
+	}
+	public Set<Count> getCount() {
+		return count;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return Objects.equals(id, other.id);
 	}
 	
 	

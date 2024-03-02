@@ -8,22 +8,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.banking.bankingsystem.entities.User;
-import com.banking.bankingsystem.serviceLayer.UserService;
+import com.banking.bankingsystem.entities.Count;
+import com.banking.bankingsystem.serviceLayer.CountService;
 
 @RestController
-@RequestMapping(value = "/users")
-public class UserResource {
+@RequestMapping(value = "/counts")
+public class CountResource {
 	
 	@Autowired
-	private  UserService service;
+	private  CountService service;
 	
 	@GetMapping
-	public ResponseEntity<List<User>> findAll(){
-		List<User> user = service.findAll();
+	public ResponseEntity<List<Count>> findAll(){
+		List<Count> user = service.findAll();
 		return ResponseEntity.ok().body(user);
 	}
-	
-	
-	
 }

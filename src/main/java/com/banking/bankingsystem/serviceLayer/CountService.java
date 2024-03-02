@@ -5,17 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.banking.bankingsystem.entities.User;
-import com.banking.bankingsystem.repositories.UserRepository;
+import com.banking.bankingsystem.entities.Count;
+import com.banking.bankingsystem.repositories.CountRepository;
 
 @Service
-public class UserService  {
+public class CountService  {
 		
 	@Autowired
-	private UserRepository repository;
+	private CountRepository repository;
 	
-	
-	public List<User> findAll(){
+
+	public List<Count> findAll(){
 		return repository.findAll();
 	}
 	
