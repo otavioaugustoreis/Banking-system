@@ -2,6 +2,7 @@ package com.banking.bankingsystem.test;
 
 
 import java.sql.Date;
+import java.time.Instant;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.banking.bankingsystem.entities.Count;
+import com.banking.bankingsystem.entities.Transaction;
 import com.banking.bankingsystem.entities.User;
 import com.banking.bankingsystem.enums.TipoConta;
+import com.banking.bankingsystem.enums.TipoTransacao;
 import com.banking.bankingsystem.repositories.CountRepository;
+import com.banking.bankingsystem.repositories.TransactionRepository;
 import com.banking.bankingsystem.repositories.UserRepository;
 
 @Configuration
@@ -24,6 +28,10 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private CountRepository countRepository;
+	
+	
+	@Autowired
+	private TransactionRepository transactionRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -39,6 +47,12 @@ public class TestConfig implements CommandLineRunner {
 		Count c3 = new Count(null, 12345, 1450.0, TipoConta.CONTA_CORRENTE, u3);
 		
 		countRepository.saveAll(Arrays.asList(c1,c2,c3));
+		
+		Transaction t1 =  new Transaction(null, TipoTransacao.PIX,10.00 ,Instant.parse("2019-06-20T19:53:07Z") ,c3);
+		Transaction t2 =  new Transaction(null, TipoTransacao.PIX,1500.00 ,Instant.parse("2019-06-20T19:53:07Z") ,c1);
+		Transaction t3 =  new Transaction(null, TipoTransacao.PIX,159.00 ,Instant.parse("2019-06-20T19:53:07Z") ,c2);
+		
+		transactionRepository.saveAll(Arrays.asList(t1,t2,t3));
 		
 	}
 
