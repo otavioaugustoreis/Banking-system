@@ -3,15 +3,22 @@ package com.banking.bankingsystem.enums;
 
 
 public enum TipoTransacao {
-	BOLETO(1),
-	PIX(2),
-	CARTAO_CREDITO(3),
-	CARTAO_DEBTO(4);
+	BOLETO(1, "Boleto"),
+	PIX(2, "Pix"),
+	CARTAO_CREDITO(3, "Cartão de crédito"),
+	CARTAO_DEBTO(4, "Cartão de débito");
 	
 	private int code;
+	private String tipo;
 	
-	TipoTransacao(int code){
+	
+	TipoTransacao(int code, String tipo){
 		this.code = code;
+		this.tipo = tipo;
+	}
+	
+	public String getTipo() {
+		return  tipo;
 	}
 	
 	public int getCode() {
