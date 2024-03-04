@@ -3,6 +3,7 @@ package com.banking.bankingsystem.test;
 
 import java.sql.Date;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +11,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.banking.bankingsystem.entities.Card;
 import com.banking.bankingsystem.entities.Count;
+import com.banking.bankingsystem.entities.Credit;
 import com.banking.bankingsystem.entities.Transaction;
 import com.banking.bankingsystem.entities.User;
 import com.banking.bankingsystem.enums.TipoConta;
 import com.banking.bankingsystem.enums.TipoTransacao;
+import com.banking.bankingsystem.repositories.CardRepository;
 import com.banking.bankingsystem.repositories.CountRepository;
 import com.banking.bankingsystem.repositories.TransactionRepository;
 import com.banking.bankingsystem.repositories.UserRepository;
@@ -32,6 +36,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private TransactionRepository transactionRepository;
+	
+	@Autowired
+	private CardRepository cardRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -54,6 +61,13 @@ public class TestConfig implements CommandLineRunner {
 		
 		transactionRepository.saveAll(Arrays.asList(t1,t2,t3));
 		
-	}
+		
+		Card ca1 = new Credit(null, LocalDate.of(2004,3,5), 1234, 316, c1,LocalDate.of(2004,3,5));
+		Card ca2 = new Credit(null, LocalDate.of(2003,3,5), 1236, 334, c1,LocalDate.of(2004,3,5));
+		Card ca3 = new Credit(null, LocalDate.of(2002,3,5), 1237, 512, c1,LocalDate.of(2004,3,5));
+		
+		
+		cardRepository.saveAll(Arrays.asList(ca1,ca2,ca3));
+}
 
 }

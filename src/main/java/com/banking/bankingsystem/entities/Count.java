@@ -45,6 +45,11 @@ public  class Count implements Serializable {
 	@OneToMany(mappedBy = "count")
 	private List<Transaction> transaction = new ArrayList<>();
 	
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "count")
+	private List<Card> count = new ArrayList<>();
+	
 	public Count() {
 		
 	}
