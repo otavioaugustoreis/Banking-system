@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.banking.bankingsystem.entities.User;
+import com.banking.bankingsystem.data.vo.v1.UserVO;
 import com.banking.bankingsystem.serviceLayer.UserService;
 
 @RestController
@@ -19,9 +19,9 @@ public class UserResource {
 	private  UserService service;
 	
 	@GetMapping
-	public ResponseEntity<List<User>> findAll(){
-		List<User> user = service.findAll();
-		return ResponseEntity.ok().body(user);
+	public ResponseEntity<List<UserVO>> findAll(){
+		List<UserVO> UserVO = service.findAll();
+		return ResponseEntity.ok().body(UserVO);
 	}
 	
 	

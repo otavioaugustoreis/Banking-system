@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
-
+import com.banking.bankingsystem.Services.TransactionServiceLayer;
 import com.banking.bankingsystem.entities.Card;
 import com.banking.bankingsystem.entities.Count;
 import com.banking.bankingsystem.entities.Credit;
@@ -55,9 +55,9 @@ public class testConfig implements CommandLineRunner{
 			
 			countRepository.saveAll(Arrays.asList(c1,c2,c3));
 			
-			Transaction t1 =  new Transaction(null, TipoTransacao.PIX,10.00 ,Instant.parse("2019-06-20T19:53:07Z") ,c3);
-			Transaction t2 =  new Transaction(null, TipoTransacao.PIX,1500.00 ,Instant.parse("2019-06-20T19:53:07Z") ,c1);
-			Transaction t3 =  new Transaction(null, TipoTransacao.PIX,159.00 ,Instant.parse("2019-06-20T19:53:07Z") ,c2);
+			Transaction t1 =  new Transaction(null, TipoTransacao.PIX, 10.00 , Instant.parse("2019-06-20T19:53:07Z") ,c3);
+			Transaction t2 =  new Transaction(null, TipoTransacao.PIX, 1500.00 , Instant.parse("2019-06-20T19:53:07Z") ,c1);
+			Transaction t3 =  new Transaction(null, TipoTransacao.PIX, 159.00 , Instant.parse("2019-06-20T19:53:07Z") ,c2);
 			
 			transactionRepository.saveAll(Arrays.asList(t1,t2,t3));
 			
@@ -68,6 +68,8 @@ public class testConfig implements CommandLineRunner{
 			
 			
 			cardRepository.saveAll(Arrays.asList(ca1,ca2,ca3));
+			
+			TransactionServiceLayer.Transferir(t1);
 		
 	}
 	

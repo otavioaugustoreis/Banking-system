@@ -61,8 +61,8 @@ public final  class Transaction implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getTipoTransacao() {
-		return tipoTransacao;
+	public TipoTransacao  getTipoTransacao() {
+		return TipoTransacao.valueOf(tipoTransacao);
 	}
 
 	public void setTipoTransacao(Integer tipoTransacao) {
